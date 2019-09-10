@@ -21,4 +21,15 @@ public class SUSerServiceImpl implements ISUerService {
 		int i = uerDao.selectCount(sUer);
 		return i;
 	}
+
+	@Override
+	public int insertOne(SUer sUer) throws Exception {
+
+		return uerDao.insert(sUer);
+	}
+
+	@Override
+	public int selectOne(SUer sUer) throws Exception{
+		return uerDao.selectCount(sUer);
+	}
 }

@@ -13,15 +13,31 @@
         $("#uid").blur(function() {
             var uid = $(this).val();
           $.get("user/check",{"uid":uid},function(data) {
-            alert(data.flag);
+            //alert(data.flag);
             if(data.flag){
-                $("#uspan").html(data.message);
-                $("#uspan").css("color","green");
+                // $("#uspan").html(data.message);
+                // $("#uspan").css("color","green");
             }else {
-                 $("#uspan").html(data.message);
-                 $("#uspan").css("color","red");
+                 // $("#uspan").html(data.message);
+                 // $("#uspan").css("color","red");
+                 alert(data.message);
+                 $("#uid").val("");
             }
-          })
+          });
+        });
+        $("#reg-form").submit(function() {
+          $.post("user/register",$(this).serialize(),function(data) {
+
+              if (data.flag){
+                  alert(data.message);
+                  location.href="index.html";
+              } else{
+                  alert("注册失败！！！！！！");
+              }
+          });
+        });
+        $("#login").click(function() {
+          location.href="index.html";
         });
       })
 </script>
@@ -29,7 +45,7 @@
 <body>
 
 <div class="form-div">
-    <form id="reg-form" action="uer/register" method="post">
+    <form id="reg-form" action="user/register" method="post">
 
         <table>
             <tr>
@@ -61,8 +77,8 @@
         </table>
 
 		<div class="buttons">
-			<input value="注 册" type="submit" style="margin-right:20px; margin-top:20px;">
-			<input value="我有账号，我要登录" type="button" style="margin-right:45px; margin-top:20px;">
+			<input  value="注 册" type="submit" style="margin-right:20px; margin-top:20px;">
+			<input id ="login" value="我有账号，我要登录" type="button" style="margin-right:45px; margin-top:20px;">
         </div>
 		
         <br class="clear">

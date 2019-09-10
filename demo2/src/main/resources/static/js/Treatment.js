@@ -44,7 +44,7 @@ function AjaxErro(e) {
                 ErroAlert(e.Erro);
         }
     } else {
-        layer.msg("未知错误！");
+        layer.msg("用户名或密码错误！");
     }
 }
 

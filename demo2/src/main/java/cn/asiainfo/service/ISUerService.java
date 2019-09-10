@@ -10,4 +10,8 @@ import cn.asiainfo.pojo.SUer;
 
 public interface ISUerService {
 	int checkUid(SUer sUer)throws Exception;
+
+	int insertOne(SUer sUer)throws Exception;
+
+	int selectOne(SUer sUer)throws Exception;
 }
