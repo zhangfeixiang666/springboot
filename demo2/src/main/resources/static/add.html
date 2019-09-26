@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>张飞翔6666</title>
+  <script src="js/jquery-3.3.1.min.js"></script>
+  <script>
+    $(function() {
+      $.get("user/findAll",{},function(data) {
+        //alert(data.length);
+        var lis = '<table width="60%" align="center" border="1px">\n'+
+                   '<caption><b>员工管理</b></caption>\n'+
+                   '    <thead align="center">\n'+
+                   '        <td>\n'+
+                   '        员工账号\n'+
+                   '        </td>\n'+
+                   '        <td>\n'+
+                   '        员工密码\n'+
+                   '        </td>\n'+
+                   '        <td>\n'+
+                   '         员工邮箱\n'+
+                   '        </td>\n'+
+                   '        <td>\n'+
+                   '         员工管理\n'+
+                   '        </td>\n'+
+                   '    </thead>';
+        for(var i = 0; i <data.length ; i++) {
+            var li = ' <tr align="center">\n'+
+                      '        <td>\n'+
+                      '       <span>'+data[i].username+'</span>\n'+
+                      '        </td>\n'+
+                      '        <td>\n'+
+                      '        <span>'+data[i].password+'</span>\n'+
+                      '        </td>\n'+
+                      '        <td>\n'+
+                      '        <span>'+data[i].email+'</span>\n'+
+                      '        </td>\n'+
+                      '        <td>\n'+
+                      '         <a href="javascript:void(0)">添加</a>\n'+
+                      '         <a href="home.html?id='+data[i].id+'">修改</a>\n'+
+                      '         <a href="javascript:void(0)" onclick="update6('+data[i].id+')">删除</a>\n'+
+                      '        </td>\n'+
+                      '    </tr>';
+            lis += li;
+
+
+        }
+        lis += '</table>';
+        $("#user").html(lis);
+      });
+
+        //1.添加操作
+        $("#sub").submit(function() {
+                        $.post("user/add",$(this).serialize(),function(flag) {
+                            //alert("666");
+                               if (flag){
+                                   location.reload();
+                                   return;
+                               }else {
+                                   location.href="http://www.baidu.com";
+                               }
+                        });
+                      });
+
+
+    });
+    //2.删除操作
+    function update6(id) {
+        var b = confirm("确定要删除吗？");
+        if (b){
+             $.get("user/delete",{id:id},function(flag) {
+                if (flag){
+                  alert("删除成功！");
+                  location.reload();
+                }
+             });
+        }
+
+        //alert(id);
+      //alert("666");
+    }
+  </script>
+</head>
+<body bgcolor="#faebd7">
+    <br><br><br><br><br><br>
+<form id="sub" action="user" method="post">
+<input type="hidden" name="action" value="add">
+<table width="50%" align="center">
+    <caption><b>添加员工</b></caption>
+    <tr align="center">
+        <td align="right"><label for="username">用户名：</label>：</td>
+        <td align="left"><input type="text" name="username" id="username"></td>
+    </tr>
+    <tr align="center">
+        <td align="right"><label for="password">密码：</label>：</td>
+        <td align="left"><input type="password" name="password" id="password"></td>
+    </tr>
+    <tr align="center">
+        <td align="right"><label for="email">邮箱：</label>：</td>
+        <td align="left"><input type="email" name="email" id="email"></td>
+    </tr>
+    <tr align="center">
+        <td align="center" colspan="2"><input type="submit" value="添加"  id="btn"></td>
+    </tr>
+</table>
+</form>
+<br>
+<br>
+<br>
+
+<div id="user">
+
+<table width="60%" align="center" border="1px">
+<caption><b>员工管理</b></caption>
+    <thead align="center">
+        <td>
+        员工账号
+        </td>
+        <td>
+        员工密码
+        </td>
+        <td>
+         员工邮箱
+        </td>
+        <td>
+         员工管理
+        </td>
+    </thead>
+    <tr align="center">
+        <td>
+       <span>zhangsan</span>
+        </td>
+        <td>
+        <span>666666</span>
+        </td>
+        <td>
+        <span>777777@qq.com</span>
+        </td>
+        <td>
+         <a href="#">添加</a>
+         <a href="#">修改</a>
+         <a href="#">删除</a>
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>

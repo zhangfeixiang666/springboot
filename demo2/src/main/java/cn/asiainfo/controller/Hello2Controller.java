@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Hello2Controller {
 	@RequestMapping("s")
 	public String sayHello(){
-
+		int i =10/0;
 		return "hello everyone";
 	}
 }

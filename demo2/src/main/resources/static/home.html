@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>张飞翔6666</title>
+</head>
+<script src="js/jquery-3.3.1.min.js">
+</script>
+<script src="js/getParameter.js"></script>
+<script>
+    $(function() {
+        var id = getParameter("id"  );
+      //alert(id);
+      $.get("user/findOne",{id:id},function(user) {
+        if (user){
+           $("#id").val(user.id);
+           $("#username").val(user.username);
+           $("#password").val(user.password);
+           $("#email").val(user.email);
+        }
+      });
+      //修改员工
+        $("#btn").click(function() {
+          //alert("666");
+          //$.post("user/update",$(thi))
+            $.post("user/update",$("#staff").serialize(),function(flag) {
+                alert(flag);
+              if (flag){
+                  location.href = "add.html";
+              }else{
+                  alert("修改失败！")
+              }
+          });
+        });
+    });
+</script>
+<body bgcolor="#faebd7">
+<br><br><br><br><br><br>
+<form action="user" method="post" id="staff">
+<table width="50%" align="center">
+    <input type="hidden" name="action" value="update">
+    <caption><b>修改员工</b></caption>
+    <tr align="center">
+            <td align="right"><label for="id">员工编号：</label>：</td>
+            <td align="left"><input type="text" name="id" id="id" readonly="readonly"></td>
+        </tr>
+    <tr align="center">
+        <td align="right"><label for="username">用户名：</label>：</td>
+        <td align="left"><input type="text" name="username" id="username"></td>
+    </tr>
+    <tr align="center">
+        <td align="right"><label for="password">密码：</label>：</td>
+        <td align="left"><input type="password" name="password" id="password"></td>
+    </tr>
+    <tr align="center">
+        <td align="right"><label for="email">邮箱：</label>：</td>
+        <td align="left"><input type="email" name="email" id="email"></td>
+    </tr>
+    <tr align="center">
+        <td align="center" colspan="2"><input type="button" value="修改" id="btn"></td>
+    </tr>
+</table>
+</form>
+</body>
+</html>

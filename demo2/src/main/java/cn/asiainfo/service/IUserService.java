@@ -12,4 +12,12 @@ import java.util.List;
 public interface IUserService {
 
 	List<User> findAll ();
+
+	boolean addUer(User user);
+
+	boolean deleteUser(User user);
+
+	User findOne(User user);
+
+	Boolean updateUser(User user);
 }

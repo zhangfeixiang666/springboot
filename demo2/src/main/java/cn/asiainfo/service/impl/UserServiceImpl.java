@@ -23,4 +23,42 @@ public class UserServiceImpl implements IUserService {
 		List<User> users = userDao.selectAll();
 		return users;
 	}
+
+	@Override
+	public boolean addUer(User user) {
+		boolean flag = false;
+		int insert = userDao.insert(user);
+		if (insert > 0){
+			flag = true;
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean deleteUser(User user) {
+		int delete = userDao.delete(user);
+		if (delete > 0){
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public User findOne(User user) {
+
+
+		return userDao.selectOne(user);
+	}
+
+	@Override
+	public Boolean updateUser(User user) {
+
+		int i = userDao.updateByPrimaryKey(user);
+		if (i > 0){
+
+			return true;
+		}
+		return false;
+	}
+
 }
